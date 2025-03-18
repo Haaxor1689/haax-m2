@@ -11,16 +11,16 @@ import pkg from '../package.json';
 // Set up command-line interface with commander
 program
   .name('haax-m2')
-  .description('Convert between DBC and CSV files for World of Warcraft')
+  .description('Converts wotlk M2 files to vanilla  format')
   .version(pkg.version)
-  .argument('[files...]', 'DBC or CSV files to convert')
+  .argument('[files...]', 'M2 files to convert')
   .addHelpText(
     'after',
     `
 You can pass multiple files or directories to convert them all at once.
 Examples:
-  $ haax-m2 path/to/Spell.dbc path/to/Map.dbc
-  $ haax-m2 path/to/DBFilesClient
+  $ haax-m2 path/to/GnomePounder.m2 path/to/Box.m2
+  $ haax-m2 path/to/Models
   `
   )
   .parse();
@@ -52,7 +52,7 @@ const run = async (filePaths: string[]) =>
         }
 
         if (filePath.toLocaleLowerCase().endsWith('.m2')) {
-          console.info(`Converting "${filePath}" to csv...`);
+          console.info(`Converting "${filePath}" to json...`);
           const json = await m2ToJson(filePath);
           json && (await Bun.write(filePath.slice(0, -3) + '.json', json));
           return;

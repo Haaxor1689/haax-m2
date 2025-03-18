@@ -6,6 +6,16 @@ export const C3Vector = n.object({
   z: n.float()
 });
 
+export const C2Vector = n.object({
+  x: n.float(),
+  y: n.float()
+});
+
+export const CRange = n.object({
+  min: n.float(),
+  max: n.float()
+});
+
 export const CAaBox = n.object({
   min: C3Vector,
   max: C3Vector
@@ -39,4 +49,22 @@ export const M2CompQuat = n
     () => {
       throw new Error('Not implemented');
     }
+  );
+
+export const setFixedPoint = (
+  newValue: number,
+  integerBits: number,
+  decimalBits: number
+) => ({
+  _raw: newValue,
+  _integerBits: integerBits,
+  _decimalBits: decimalBits,
+  converted: newValue / Math.pow(2, decimalBits)
+});
+
+// TODO: Test
+export const FixedPoint = (integerBits: number, decimalBits: number) =>
+  n.uint16().transform(
+    ctx => setFixedPoint(ctx.value, integerBits, decimalBits),
+    ctx => ctx.value._raw
   );
