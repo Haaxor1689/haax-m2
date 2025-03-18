@@ -1,0 +1,28 @@
+{
+  "name": "haax-m2",
+  "version": "1.1.0",
+  "author": "Haaxor1689",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Haaxor1689/haax-m2.git"
+  },
+  "main": "./dist/index.js",
+  "bin": "./dist/index.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "bundle": "bun build ./src/index.ts --compile --minify --outfile haax-m2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.4",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@haaxor1689/nil": "^1.0.3",
+    "anymatch": "^3.1.3",
+    "commander": "^11.1.0"
+  }
+}
